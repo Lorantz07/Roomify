@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room preview — Roomify</title>
+  <meta name="description" content="A measured Phase 1 room preview in Roomify. Your saved footprint, dimensions and finishes, ready for the next phase of the studio.">
+  <meta name="theme-color" content="#F5F1E8">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-editor" id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header site-header--app editor-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Roomify — home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="1.7" y="1.7" width="24.6" height="24.6" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 1.7v11.7h13" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 13.4v13" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 19.2a5.8 5.8 0 0 1-5.8-5.8" stroke="currentColor" stroke-width="1.35"/>
+          <circle cx="19.8" cy="21.2" r="1.3" fill="#B97961"/>
+        </svg>
+        <span class="brand__word">roomify<span class="brand__dot">.</span></span>
+      </a>
+
+      <div class="editor-crumb">
+        <a href="dashboard.html">Studio</a>
+        <span aria-hidden="true">/</span>
+        <span class="editor-crumb__current" data-crumb-current>Room</span>
+      </div>
+
+      <div class="header__actions">
+        <span class="save-state" data-save-state>
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="7.25" stroke="currentColor" stroke-width="1.1"/>
+            <path d="m5.8 9 2.1 2.1 4.3-4.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Saved locally
+        </span>
+        <a class="btn btn--sm btn--ghost btn--back" href="dashboard.html">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M8 4 3 9l5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          All rooms
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div data-editor-content hidden>
+      <section class="editor" aria-labelledby="room-title">
+        <div class="editor__layout">
+          <div class="editor-stage">
+            <div class="editor-stage__bar">
+              <span class="editor-stage__title">
+                Room plan
+                <span class="phase-badge">Phase 1 · Preview</span>
+              </span>
+              <span class="editor-stage__scale">Measured · fit to view</span>
+            </div>
+
+            <div class="editor-canvas">
+              <div class="editor-plan" data-plan></div>
+              <span class="editor-canvas__state">Read-only preview</span>
+            </div>
+
+            <p class="editor-stage__foot">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1"/>
+                <path d="M8 7.2v4M8 4.9v.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+              </svg>
+              This plan is generated from the room you saved. Furniture placement, drag-and-drop and editing arrive in Phase 2.
+            </p>
+          </div>
+
+          <aside class="editor-panel">
+            <p class="editor-panel__kicker">Room file</p>
+            <h1 id="room-title" data-project-name>Room</h1>
+            <p class="editor-panel__type">
+              <span data-project-type>Room</span>
+              <span aria-hidden="true">·</span>
+              <span data-project-floor>Oak floor</span>
+            </p>
+
+            <dl class="detail-list">
+              <div>
+                <dt>Footprint</dt>
+                <dd data-dimensions>400 × 500 cm</dd>
+              </div>
+              <div>
+                <dt>Area</dt>
+                <dd data-area>20 m²</dd>
+              </div>
+              <div>
+                <dt>Floor finish</dt>
+                <dd data-floor-detail>Oak</dd>
+              </div>
+              <div>
+                <dt>Created</dt>
+                <dd data-created>—</dd>
+              </div>
+              <div>
+                <dt>Last saved</dt>
+                <dd data-updated>—</dd>
+              </div>
+            </dl>
+
+            <div class="phase-note">
+              <p class="phase-note__title">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <rect x="2.6" y="2.6" width="10.8" height="10.8" stroke="currentColor" stroke-width="1"/>
+                  <path d="M5.2 8.2 7 10l3.9-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                The canvas is next.
+              </p>
+              <p>Phase 1 gives every room a real, measured footprint. Furniture, colour and drag-and-drop editing will be built in Phase 2 — this page is a preview of the plan.</p>
+            </div>
+
+            <div class="editor-panel__actions">
+              <a class="btn" href="dashboard.html?new=1">
+                Start another room
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a class="btn btn--ghost" href="dashboard.html">Back to studio</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <section class="editor-missing" data-editor-missing hidden aria-labelledby="missing-title">
+      <div class="container">
+        <div class="editor-missing__inner">
+          <svg viewBox="0 0 58 58" fill="none" aria-hidden="true">
+            <rect x="5.5" y="5.5" width="47" height="47" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M28 5.5v22h24.5M28 27.5v25" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M5.5 42h22.5" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4"/>
+            <circle cx="39" cy="41" r="7" stroke="currentColor" stroke-width="1.2"/>
+            <path d="m44.2 46.2 4.8 4.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <p class="eyebrow eyebrow--plain">Room not found</p>
+          <h1 id="missing-title">This room isn't here.</h1>
+          <p data-missing-message>Open a saved room from your studio to see its measured plan.</p>
+          <div class="editor-missing__actions">
+            <a class="btn" href="dashboard.html">
+              Back to your studio
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="text-link" href="dashboard.html?new=1">Start a new room</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="slim-footer">
+    <div class="container slim-footer__inner">
+      <p>Phase 1 · measured room preview</p>
+      <p>© <span data-year>2026</span> Roomify · <a href="index.html">Back to home</a></p>
+    </div>
+  </footer>
+
+  <script src="js/catalog.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/plan.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/editor.js" defer></script>
+</body>
+</html>

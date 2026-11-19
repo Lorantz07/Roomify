@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roomify — Design your space, your way</title>
+  <meta name="description" content="Roomify is a calm, browser-based interior design studio. Plan rooms to real dimensions, arrange furniture, and save your work without an account.">
+  <meta name="theme-color" content="#F5F1E8">
+  <meta property="og:title" content="Roomify — Design your space, your way">
+  <meta property="og:description" content="A quiet 2D room planner for real spaces. Measure in centimeters, arrange what matters, and keep your plans in your browser.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-landing" id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Roomify — home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="1.7" y="1.7" width="24.6" height="24.6" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 1.7v11.7h13" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 13.4v13" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 19.2a5.8 5.8 0 0 1-5.8-5.8" stroke="currentColor" stroke-width="1.35"/>
+          <circle cx="19.8" cy="21.2" r="1.3" fill="#B97961"/>
+        </svg>
+        <span class="brand__word">roomify<span class="brand__dot">.</span></span>
+      </a>
+
+      <nav class="header__nav" aria-label="Primary" data-section-nav>
+        <a class="nav-link" href="#features" data-section-link="features">Features</a>
+        <a class="nav-link" href="#how-it-works" data-section-link="how-it-works">How it works</a>
+        <a class="nav-link" href="#inspiration" data-section-link="inspiration">Inspiration</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="header__studio-link" href="dashboard.html">Dashboard</a>
+        <a class="btn btn--sm" href="dashboard.html">
+          Start designing
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" data-menu-open>
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 6h14M2 12h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero ------------------------------------------------------------ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow hero__eyebrow">Your space, your story</p>
+          <h1 class="hero__title" id="hero-title">
+            Design a space<br>
+            that <em>feels</em><br>
+            like you.
+          </h1>
+          <p class="hero__lede">Bring your ideas to life. Design, arrange, and personalize your dream space with Roomify.</p>
+          <div class="hero__actions">
+            <a class="btn" href="dashboard.html">
+              Start designing
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <p class="hero__note">Free to use.<br>No account required.</p>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <figure class="hero__figure">
+            <img
+              src="assets/images/hero.jpg"
+              alt="A sunlit living room with a tan leather sofa, pale oak shelving, a patterned rug, and a large potted plant."
+              width="1800" height="1800" fetchpriority="high">
+            <figcaption class="plan-ticket hero__ticket">
+              <div class="plan-ticket__head">
+                <span>Room study 01</span>
+                <span>420 × 500 cm</span>
+              </div>
+              <div class="plan-ticket__plan">
+                <svg viewBox="0 0 218 88" fill="none" aria-hidden="true">
+                  <rect x="18" y="7" width="182" height="64" fill="#EFE8DB" stroke="#3C3F3B" stroke-width="2.2"/>
+                  <path d="M18 7v64h182" stroke="#3C3F3B" stroke-width="2.2"/>
+                  <rect x="30" y="17" width="42" height="44" fill="#DAC5A5" stroke="#575B54" stroke-width="0.9"/>
+                  <rect x="31" y="18" width="40" height="9" fill="#F4EEE3"/>
+                  <rect x="31" y="42" width="40" height="18" fill="#A7B29E"/>
+                  <rect x="84" y="25" width="44" height="28" rx="1" fill="#CBD3C0" stroke="#575B54" stroke-width="0.9"/>
+                  <path d="M84 33h44M84 45h44" stroke="#879783" stroke-width="0.9"/>
+                  <circle cx="158" cy="39" r="14" fill="#D1B792" stroke="#575B54" stroke-width="0.9"/>
+                  <circle cx="181" cy="21" r="7" fill="#9AA98F"/>
+                  <circle cx="76" cy="59" r="6" fill="#9AA98F"/>
+                  <path d="M18 80h182" stroke="#8A8D85" stroke-width="0.7"/>
+                  <path d="M18 77v6M200 77v6" stroke="#8A8D85" stroke-width="0.7"/>
+                  <text x="109" y="77" text-anchor="middle" fill="#555952" font-family="DM Sans, sans-serif" font-size="6.4" letter-spacing="0.8">420 cm</text>
+                </svg>
+              </div>
+              <div class="plan-ticket__foot">
+                <strong>Living room</strong>
+                <span>Oak · Sage</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="hero__rail">
+        <p>Measured in centimeters. Built around the way you live.</p>
+        <a class="text-link" href="#features">
+          Explore Roomify
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 3v12M4 10l5 5 5-5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Features -------------------------------------------------------- -->
+    <section class="features section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">The essentials</p>
+          <h2 class="section-head__title" id="features-title">Everything you need.<br>Nothing you don't.</h2>
+          <p class="section-head__intro">A focused set of tools for planning real rooms. No account walls, no learning curve, and no clutter between you and a good idea.</p>
+        </header>
+
+        <div class="feature-grid">
+          <article class="feature" data-reveal style="--reveal-delay: 0ms">
+            <div class="feature__top">
+              <span class="feature__number">01</span>
+              <svg class="feature__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect x="4.5" y="7.5" width="23" height="17" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M4.5 3.5v8M27.5 3.5v8M4.5 5h23" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M11 15.5 9 17.5l2 2M21 15.5l2 2-2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 17.5h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Easy Room Planning</h3>
+            <p>Set the true width and depth of your room in centimeters, then see exactly what fits before anything moves.</p>
+          </article>
+
+          <article class="feature" data-reveal style="--reveal-delay: 70ms">
+            <div class="feature__top">
+              <span class="feature__number">02</span>
+              <svg class="feature__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M7 17v-4.5A2.5 2.5 0 0 1 9.5 10h13a2.5 2.5 0 0 1 2.5 2.5V17" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M7 16.5h18M7 16.5v6M25 16.5v6M10 22.5v4M22 22.5v4M10 19.5h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="M9.5 23h2M20.5 23h2" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <h3>Furniture Library</h3>
+            <p>Beds, sofas, cabinetry, lighting, doors, and windows — every piece drawn from above and proportioned to real life.</p>
+          </article>
+
+          <article class="feature" data-reveal style="--reveal-delay: 140ms">
+            <div class="feature__top">
+              <span class="feature__number">03</span>
+              <svg class="feature__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect x="8.5" y="8.5" width="15" height="15" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M6 10.5V6h4.5M26 10.5V6h-4.5M6 21.5V26h4.5M26 21.5V26h-4.5" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M16 12v8M12 16h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Customize Everything</h3>
+            <p>Move, rotate, resize, and recolor. Every decision stays editable, so the room can keep changing as your plans do.</p>
+          </article>
+
+          <article class="feature" data-reveal style="--reveal-delay: 210ms">
+            <div class="feature__top">
+              <span class="feature__number">04</span>
+              <svg class="feature__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect x="5" y="7" width="22" height="18" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M5 12h22M8.5 9.5h.01M11.5 9.5h.01" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="m12 18 2.6 2.6L21 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Save Your Design</h3>
+            <p>Your projects live in this browser, saved as you work. No sign-up, no subscription, no designs leaving your desk.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works ---------------------------------------------------- -->
+    <section class="how" id="how-it-works" aria-labelledby="how-title">
+      <div class="container how__grid">
+        <div class="how__visual" data-reveal>
+          <div class="plan-board">
+            <div class="plan-board__head">
+              <span>Sample plan</span>
+              <span>Studio · 440 × 500 cm</span>
+            </div>
+            <div class="plan-board__stage">
+              <svg class="plan-illustration" viewBox="0 0 620 560" fill="none" role="img" aria-labelledby="plan-title plan-desc">
+                <title id="plan-title">An example studio floor plan</title>
+                <desc id="plan-desc">A measured room with a bed, sofa, coffee table, desk, plants, a window, and a door, complete with dimension lines.</desc>
+                <defs>
+                  <pattern id="floor-lines" width="26" height="26" patternUnits="userSpaceOnUse">
+                    <path d="M0 0v26" stroke="#C8B89F" stroke-width="0.6" opacity="0.55"/>
+                  </pattern>
+                  <filter id="plan-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="1.6" stdDeviation="1.5" flood-color="#292B2A" flood-opacity="0.12"/>
+                  </filter>
+                </defs>
+
+                <g class="plan-illustration__dims">
+                  <path d="M120 50v-12M480 50v-12M120 44h360" stroke="#8A8D85" stroke-width="0.8"/>
+                  <path d="m120 44 5-2v4zM480 44l-5-2v4z" fill="#8A8D85"/>
+                  <text x="300" y="36" text-anchor="middle">440 cm</text>
+                  <path d="M94 76h-12M94 476h-12M88 76v400" stroke="#8A8D85" stroke-width="0.8"/>
+                  <path d="m88 76 2 5h-4zM88 476l2-5h-4z" fill="#8A8D85"/>
+                  <text transform="translate(70 276) rotate(-90)" text-anchor="middle">500 cm</text>
+                </g>
+
+                <g class="plan-illustration__room">
+                  <rect x="120" y="76" width="360" height="400" fill="#F1EBDF"/>
+                  <rect x="120" y="76" width="360" height="400" fill="url(#floor-lines)"/>
+                  <rect x="124" y="80" width="352" height="392" stroke="#393C38" stroke-width="8"/>
+                  <rect x="234" y="74" width="116" height="12" fill="#FBF8F1"/>
+                  <path d="M234 78h116M234 82h116" stroke="#8F9F89" stroke-width="1"/>
+                  <path d="M234 74v12M350 74v12" stroke="#393C38" stroke-width="3"/>
+                  <rect x="118" y="172" width="12" height="106" fill="#FBF8F1"/>
+                  <path d="M122 172v106M118 172h12M118 278h12" stroke="#8F9F89" stroke-width="1"/>
+                  <path d="M350 478h60" stroke="#F1EBDF" stroke-width="10"/>
+                  <path d="M350 476V414" stroke="#555952" stroke-width="1.6"/>
+                  <path d="M350 414a60 60 0 0 1 60 60" stroke="#9AA98F" stroke-width="1.1" stroke-dasharray="3 4"/>
+                </g>
+
+                <g class="plan-illustration__furniture">
+                  <g class="plan-illustration__item" style="--item-delay: 80ms">
+                    <rect x="214" y="170" width="206" height="224" rx="1" fill="#E9E1D3" opacity="0.7"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 170ms" filter="url(#plan-shadow)">
+                    <rect x="143" y="118" width="142" height="202" fill="#FBF8F1" stroke="#484B46" stroke-width="1.4"/>
+                    <rect x="143" y="118" width="142" height="17" fill="#C7B08E"/>
+                    <rect x="154" y="146" width="54" height="32" fill="#FFFDF8" stroke="#777B73" stroke-width="0.9"/>
+                    <rect x="220" y="146" width="54" height="32" fill="#FFFDF8" stroke="#777B73" stroke-width="0.9"/>
+                    <rect x="144" y="225" width="140" height="94" fill="#A9B5A0"/>
+                    <path d="M144 245h140" stroke="#97A58D" stroke-width="0.8"/>
+                    <rect x="294" y="126" width="30" height="32" fill="#D8C09F" stroke="#555952" stroke-width="0.9"/>
+                    <circle cx="309" cy="142" r="5" fill="#F5EBD9" stroke="#8A7253" stroke-width="0.8"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 260ms" filter="url(#plan-shadow)">
+                    <rect x="407" y="148" width="59" height="162" fill="#CBD3C0" stroke="#484B46" stroke-width="1.2"/>
+                    <rect x="452" y="148" width="14" height="162" fill="#B8C3AC"/>
+                    <path d="M407 202h59M407 256h59" stroke="#A7B49B" stroke-width="0.9"/>
+                    <rect x="412" y="194" width="40" height="8" rx="3" fill="#E8E3D6"/>
+                    <rect x="412" y="248" width="40" height="8" rx="3" fill="#E8E3D6"/>
+                    <circle cx="436" cy="290" r="10" fill="#D9C8AC" stroke="#807B70" stroke-width="0.8"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 350ms">
+                    <circle cx="352" cy="279" r="38" fill="#D7BE9C" stroke="#555952" stroke-width="1.1"/>
+                    <circle cx="352" cy="279" r="24" stroke="#C4AA86" stroke-width="0.7"/>
+                    <circle cx="352" cy="279" r="5" fill="#8F9F89"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 440ms" filter="url(#plan-shadow)">
+                    <rect x="144" y="359" width="119" height="43" fill="#D8BE9D" stroke="#555952" stroke-width="1"/>
+                    <path d="M152 366h28v10h-28zM188 366h52v10h-52z" fill="#F5EEE2" stroke="#8E8A80" stroke-width="0.6"/>
+                    <circle cx="204" cy="430" r="19" fill="#AAB69F" stroke="#555952" stroke-width="1"/>
+                    <path d="M188 424a16 16 0 0 1 32 0" stroke="#88957E" stroke-width="2.5"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 520ms">
+                    <circle cx="151" cy="331" r="11" fill="#E8DFCE" stroke="#6A6D66" stroke-width="0.9"/>
+                    <circle cx="151" cy="331" r="4" fill="#C0A883"/>
+                  </g>
+
+                  <g class="plan-illustration__item" style="--item-delay: 600ms">
+                    <circle cx="446" cy="403" r="17" fill="#E4D8C4" stroke="#6A6D66" stroke-width="0.9"/>
+                    <ellipse cx="438" cy="385" rx="8" ry="15" fill="#94A38A" transform="rotate(-24 438 385)"/>
+                    <ellipse cx="456" cy="384" rx="7" ry="14" fill="#A7B29D" transform="rotate(22 456 384)"/>
+                    <ellipse cx="447" cy="376" rx="6" ry="13" fill="#89987F"/>
+                  </g>
+                </g>
+
+                <g class="plan-illustration__notes">
+                  <path d="M526 92v-22" stroke="#555952" stroke-width="0.9"/>
+                  <path d="m526 70 6 11h-12z" fill="none" stroke="#555952" stroke-width="0.9"/>
+                  <text x="526" y="108" text-anchor="middle">N</text>
+                  <path d="M120 528h96" stroke="#8A8D85" stroke-width="0.8"/>
+                  <path d="M120 524v8M216 524v8M120 528h48" stroke="#8A8D85" stroke-width="0.8"/>
+                  <text x="120" y="546">0</text>
+                  <text x="216" y="546" text-anchor="end">1 m</text>
+                </g>
+              </svg>
+            </div>
+            <p class="plan-board__note">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h12M5 4v8M11 4v8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+              Walls, openings, and furniture share one scale.
+            </p>
+          </div>
+        </div>
+
+        <div class="how__content">
+          <p class="eyebrow" data-reveal>How it works</p>
+          <h2 class="how__title" id="how-title" data-reveal>From empty plan to a room that works.</h2>
+          <ol class="steps">
+            <li class="step" data-reveal style="--reveal-delay: 60ms">
+              <span class="step__number">01</span>
+              <div class="step__copy">
+                <h3>Create your room</h3>
+                <p>Enter the real width and depth in centimeters. Choose a floor and wall finish, and your measured plan is ready.</p>
+              </div>
+            </li>
+            <li class="step" data-reveal style="--reveal-delay: 120ms">
+              <span class="step__number">02</span>
+              <div class="step__copy">
+                <h3>Add your furniture</h3>
+                <p>Bring in beds, sofas, tables, and storage from a considered library. Every piece arrives at its true size.</p>
+              </div>
+            </li>
+            <li class="step" data-reveal style="--reveal-delay: 180ms">
+              <span class="step__number">03</span>
+              <div class="step__copy">
+                <h3>Make it yours</h3>
+                <p>Rearrange, rotate, resize, and recolor. Step back, live with the idea, and change it again whenever you like.</p>
+              </div>
+            </li>
+          </ol>
+          <a class="text-link" href="dashboard.html" data-reveal>
+            Start with a blank room
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inspiration ----------------------------------------------------- -->
+    <section class="inspiration section" id="inspiration" aria-labelledby="inspiration-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Room studies</p>
+          <h2 class="section-head__title" id="inspiration-title">Rooms with<br>a point of view.</h2>
+          <p class="section-head__intro">A small collection of layouts, materials, and quiet corners to borrow from. Every study begins with proportion, not trends.</p>
+        </header>
+
+        <div class="study-bar" data-reveal>
+          <div class="study-filters" role="group" aria-label="Filter room studies">
+            <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">
+              All <span>08</span>
+            </button>
+            <button class="filter-btn" type="button" data-filter="bedroom" aria-pressed="false">
+              Bedroom <span>02</span>
+            </button>
+            <button class="filter-btn" type="button" data-filter="living" aria-pressed="false">
+              Living Room <span>02</span>
+            </button>
+            <button class="filter-btn" type="button" data-filter="kitchen" aria-pressed="false">
+              Kitchen <span>02</span>
+            </button>
+            <button class="filter-btn" type="button" data-filter="workspace" aria-pressed="false">
+              Workspace <span>02</span>
+            </button>
+          </div>
+          <p class="study-bar__count" data-study-count>08 studies</p>
+        </div>
+
+        <div class="studies" data-studies data-view="all">
+          <figure class="study" data-category="bedroom">
+            <div class="study__media study__media--portrait">
+              <img src="assets/images/inspiration-bedroom-linen.jpg" alt="A calm bedroom with pale sage walls, a low oak bed, ivory linen bedding, and a copper-toned throw." width="1200" height="1200" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>01</span><span>Bedroom</span></p>
+              <h3 class="study__title">Linen at rest</h3>
+              <p class="study__details">Sage walls · Washed linen · Morning light</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="living">
+            <div class="study__media study__media--wide">
+              <img src="assets/images/inspiration-living-soft.jpg" alt="A light living room with a long cream sofa, sage green wall, and a large window with linen curtains." width="1200" height="675" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>02</span><span>Living Room</span></p>
+              <h3 class="study__title">A quiet room</h3>
+              <p class="study__details">Pale oak · Linen · Soft sage</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="kitchen">
+            <div class="study__media study__media--tall">
+              <img src="assets/images/inspiration-kitchen-green.jpg" alt="A warm kitchen with deep green cabinetry, reclaimed oak shelves, and a pale stone floor." width="1100" height="1956" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>03</span><span>Kitchen</span></p>
+              <h3 class="study__title">The green kitchen</h3>
+              <p class="study__details">Forest green · Oak · Warm white</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="workspace">
+            <div class="study__media study__media--wide">
+              <img src="assets/images/inspiration-workspace-desk.jpg" alt="A quiet desk by a tall window with a computer, plant, and a view over the city." width="1100" height="733" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>04</span><span>Workspace</span></p>
+              <h3 class="study__title">A desk by the window</h3>
+              <p class="study__details">Daylight · Green · Clear surfaces</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="bedroom">
+            <div class="study__media study__media--tall">
+              <img src="assets/images/inspiration-bedroom-terracotta.jpg" alt="A close view of an oak bed with terracotta and striped linen pillows in warm afternoon light." width="1000" height="1500" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>05</span><span>Bedroom</span></p>
+              <h3 class="study__title">Terracotta morning</h3>
+              <p class="study__details">Clay linen · Pale oak · Warm wall</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="living">
+            <div class="study__media study__media--square">
+              <img src="assets/images/inspiration-living-warm.jpg" alt="A warm living room with a tan leather sofa, gallery wall, oak coffee table, and tall plants." width="1200" height="900" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>06</span><span>Living Room</span></p>
+              <h3 class="study__title">Sun on oak</h3>
+              <p class="study__details">Caramel leather · Oak · Afternoon</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="kitchen">
+            <div class="study__media study__media--wide">
+              <img src="assets/images/inspiration-kitchen-oak.jpg" alt="A modern kitchen with oak cabinetry, a pale stone island, and three dark pendant lights." width="1200" height="800" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>07</span><span>Kitchen</span></p>
+              <h3 class="study__title">Oak and marble</h3>
+              <p class="study__details">Flat oak · Stone · Considered storage</p>
+            </figcaption>
+          </figure>
+
+          <figure class="study" data-category="workspace">
+            <div class="study__media study__media--portrait">
+              <img src="assets/images/inspiration-workspace-detail.jpg" alt="A warm wooden desk in low evening light with a laptop, notebook, and a small plant." width="1100" height="1467" loading="lazy">
+            </div>
+            <figcaption class="study__caption">
+              <p class="study__meta"><span>08</span><span>Workspace</span></p>
+              <h3 class="study__title">The writing corner</h3>
+              <p class="study__details">Walnut · Wool · One warm lamp</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Manifesto ------------------------------------------------------- -->
+    <section class="manifesto" aria-labelledby="manifesto-title">
+      <div class="container manifesto__grid">
+        <p class="eyebrow">A point of view</p>
+        <h2 class="manifesto__quote" id="manifesto-title">A room should hold your life, <em>not just your furniture.</em></h2>
+        <div class="manifesto__note" data-reveal>
+          <p>Start with the footprint, not the trend. Give the things you love a place, leave room to breathe, and let the plan follow the way you actually live.</p>
+          <p class="manifesto__signature">Design your space, your way.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA ----------------------------------------------------- -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="container closing__grid">
+        <div class="closing__copy" data-reveal>
+          <p class="eyebrow">Start where you are</p>
+          <h2 class="closing__title" id="closing-title">The room is already yours.</h2>
+          <p class="closing__lede">Make it fit the way you live. Start with a footprint, bring in what matters, and take your time.</p>
+          <div class="closing__actions">
+            <a class="btn btn--ivory" href="dashboard.html">
+              Open your studio
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="closing__link" href="#inspiration">Browse room studies</a>
+          </div>
+          <p class="closing__note">Free to use. No account. Saved in your browser.</p>
+        </div>
+
+        <div class="closing__art" aria-hidden="true">
+          <svg viewBox="0 0 520 430" fill="none">
+            <rect x="70" y="50" width="360" height="300" stroke="#2E332D" stroke-width="1.4" opacity="0.4"/>
+            <rect x="76" y="56" width="348" height="288" stroke="#F5F1E8" stroke-width="1.4" opacity="0.55"/>
+            <path d="M250 56v120h174M250 176v168" stroke="#F5F1E8" stroke-width="1" opacity="0.4"/>
+            <rect x="98" y="92" width="110" height="90" stroke="#F5F1E8" stroke-width="1.2" opacity="0.7"/>
+            <rect x="108" y="100" width="40" height="26" stroke="#F5F1E8" stroke-width="0.9" opacity="0.55"/>
+            <rect x="154" y="100" width="40" height="26" stroke="#F5F1E8" stroke-width="0.9" opacity="0.55"/>
+            <rect x="102" y="165" width="102" height="28" fill="#F5F1E8" opacity="0.12"/>
+            <rect x="302" y="92" width="104" height="52" stroke="#F5F1E8" stroke-width="1.1" opacity="0.65"/>
+            <path d="M302 111h104M302 130h104" stroke="#F5F1E8" stroke-width="0.7" opacity="0.35"/>
+            <circle cx="298" cy="198" r="38" stroke="#F5F1E8" stroke-width="1.1" opacity="0.65"/>
+            <circle cx="298" cy="198" r="19" stroke="#F5F1E8" stroke-width="0.8" opacity="0.35"/>
+            <path d="M118 278h74v42h-74z" stroke="#F5F1E8" stroke-width="1.1" opacity="0.65"/>
+            <circle cx="182" cy="342" r="17" stroke="#F5F1E8" stroke-width="0.9" opacity="0.5"/>
+            <circle cx="392" cy="316" r="15" stroke="#F5F1E8" stroke-width="0.9" opacity="0.5"/>
+            <path d="M392 301v-18M392 331v18M377 316h-18M407 316h18" stroke="#F5F1E8" stroke-width="0.7" opacity="0.3"/>
+            <path d="M70 380h360M70 374v12M430 374v12" stroke="#F5F1E8" stroke-width="0.8" opacity="0.55"/>
+            <text x="250" y="400" text-anchor="middle" fill="#F5F1E8" opacity="0.65" font-family="DM Sans, sans-serif" font-size="9" letter-spacing="1.4">440 CM</text>
+            <path d="M48 50v300M42 50h12M42 350h12" stroke="#F5F1E8" stroke-width="0.8" opacity="0.55"/>
+            <text transform="translate(28 200) rotate(-90)" text-anchor="middle" fill="#F5F1E8" opacity="0.65" font-family="DM Sans, sans-serif" font-size="9" letter-spacing="1.4">500 CM</text>
+            <path d="M80 200c50 52 98 24 96-42m-4 42h4v-8" stroke="#F5F1E8" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="4 5" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Roomify — home">
+            <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <rect x="1.7" y="1.7" width="24.6" height="24.6" stroke="currentColor" stroke-width="1.35"/>
+              <path d="M13.4 1.7v11.7h13M13.4 13.4v13" stroke="currentColor" stroke-width="1.35"/>
+              <path d="M13.4 19.2a5.8 5.8 0 0 1-5.8-5.8" stroke="currentColor" stroke-width="1.35"/>
+              <circle cx="19.8" cy="21.2" r="1.3" fill="#B97961"/>
+            </svg>
+            <span class="brand__word">roomify<span class="brand__dot">.</span></span>
+          </a>
+          <p class="footer__statement">A quiet space to plan real rooms. Measure, arrange, and keep your ideas in one place.</p>
+        </div>
+
+        <div>
+          <h2 class="footer__heading">Explore</h2>
+          <nav class="footer__links" aria-label="Explore Roomify">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#inspiration">Inspiration</a>
+          </nav>
+        </div>
+
+        <div>
+          <h2 class="footer__heading">Studio</h2>
+          <nav class="footer__links" aria-label="Roomify studio">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard.html?new=1">Start a new room</a>
+            <a href="dashboard.html#templates">Room templates</a>
+          </nav>
+        </div>
+
+        <div>
+          <h2 class="footer__heading">Good to know</h2>
+          <p class="footer__note">No accounts, no subscriptions. Your projects stay in this browser, on this device.</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Roomify. All rights reserved.</span>
+        <span>Interior photography via <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="menu-sheet" id="menu-sheet" aria-label="Site menu">
+    <div class="menu-sheet__top">
+      <a class="brand" href="index.html" aria-label="Roomify — home">
+        <svg class="brand__mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="1.7" y="1.7" width="24.6" height="24.6" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 1.7v11.7h13M13.4 13.4v13" stroke="currentColor" stroke-width="1.35"/>
+          <path d="M13.4 19.2a5.8 5.8 0 0 1-5.8-5.8" stroke="currentColor" stroke-width="1.35"/>
+          <circle cx="19.8" cy="21.2" r="1.3" fill="#B97961"/>
+        </svg>
+        <span class="brand__word">roomify<span class="brand__dot">.</span></span>
+      </a>
+      <button class="menu-sheet__close" type="button" aria-label="Close menu" data-menu-close>
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m3 3 12 12M15 3 3 15" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="menu-sheet__nav" aria-label="Mobile">
+      <a class="menu-sheet__link" href="#features"><span class="menu-sheet__index">01</span>Features</a>
+      <a class="menu-sheet__link" href="#how-it-works"><span class="menu-sheet__index">02</span>How it works</a>
+      <a class="menu-sheet__link" href="#inspiration"><span class="menu-sheet__index">03</span>Inspiration</a>
+      <a class="menu-sheet__link" href="dashboard.html"><span class="menu-sheet__index">04</span>Dashboard</a>
+    </nav>
+    <div class="menu-sheet__foot">
+      <a class="btn btn--block" href="dashboard.html">
+        Start designing
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p>Free to use. No account required.</p>
+    </div>
+  </dialog>
+
+  <script src="js/ui.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/landing.js" defer></script>
+</body>
+</html>

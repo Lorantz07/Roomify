@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Roomify — Design tokens
+   Colour, type, spacing and motion primitives used across every page.
+   ========================================================================== */
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/dm-sans-latin.woff2") format("woff2");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/dm-sans-italic-latin.woff2") format("woff2");
+  font-weight: 100 1000;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("../assets/fonts/dm-serif-display-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("../assets/fonts/dm-serif-display-italic-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Colour — the official Roomify palette */
+  --ivory: #f5f1e8;
+  --ivory-deep: #ede8dd;
+  --paper: #fbf8f1;
+  --soft-gray: #e5e2dc;
+  --charcoal: #292b2a;
+  --charcoal-soft: #555952;
+  --sage: #879783;
+  --sage-deep: #6f806b;
+  --sage-light: #dde3d7;
+  --terracotta: #b97961;
+  --terracotta-deep: #9c604b;
+
+  /* Supporting neutrals, kept within the same warm family */
+  --stone: #d8d3c9;
+  --line: rgba(41, 43, 42, 0.14);
+  --line-strong: rgba(41, 43, 42, 0.26);
+  --white: #fffdf8;
+  --danger: #8c4b3b;
+
+  /* Type */
+  --serif: "DM Serif Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* Layout */
+  --container-max: 1440px;
+  --side: clamp(20px, 5vw, 72px);
+  --nav-h: 84px;
+  --section-y: clamp(76px, 9vw, 132px);
+  --measure: 65ch;
+
+  /* Shape & motion */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --shadow-soft: 0 20px 50px rgba(41, 43, 42, 0.09);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 320ms;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-h: 76px;
+  }
+}
