@@ -7,8 +7,21 @@
   <meta name="description" content="Your Roomify studio. Start a measured room from scratch or a template, and keep every plan saved in this browser.">
   <meta name="theme-color" content="#F5F1E8">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    // Preload fonts over HTTP only: file:// pages cannot fetch font files
+    // across origins, and CSS @font-face falls back gracefully there.
+    if (location.protocol !== 'file:') {
+      ['assets/fonts/dm-serif-display-latin.woff2', 'assets/fonts/dm-sans-latin.woff2'].forEach(function (href) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'font';
+        link.type = 'font/woff2';
+        link.crossOrigin = 'anonymous';
+        link.href = href;
+        document.head.appendChild(link);
+      });
+    }
+  </script>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -239,7 +252,7 @@
         </div>
 
         <p class="field__error" role="alert" data-form-error hidden></p>
-        <p class="form-note">Every room starts with an empty measured plan. Furniture and drag-and-drop editing arrive in the next phase.</p>
+        <p class="form-note">Every room starts with an empty measured plan, ready for furniture in the editor.</p>
       </div>
 
       <div class="dialog__foot">
@@ -275,6 +288,7 @@
   <script src="js/catalog.js" defer></script>
   <script src="js/ui.js" defer></script>
   <script src="js/storage.js" defer></script>
+  <script src="js/furniture.js" defer></script>
   <script src="js/plan.js" defer></script>
   <script src="js/nav.js" defer></script>
   <script src="js/dashboard.js" defer></script>

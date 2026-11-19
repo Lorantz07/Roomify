@@ -79,6 +79,12 @@
     return 'editor.html?id=' + encodeURIComponent(id);
   }
 
+  function objectSummary(project) {
+    var count = project && Array.isArray(project.objects) ? project.objects.length : 0;
+    if (!count) return 'Empty plan';
+    return count + (count === 1 ? ' piece' : ' pieces');
+  }
+
   function canSave() {
     return storage.isAvailable() && !storage.hasLoadError();
   }
@@ -149,7 +155,7 @@
     var meta =
       project.room.widthCm + ' × ' + project.room.heightCm + ' cm · ' +
       formatArea(project.room.widthCm, project.room.heightCm) + ' m² · ' +
-      escapeHTML(floor.label);
+      escapeHTML(floor.label) + ' · ' + objectSummary(project);
 
     return (
       '<article class="project-card">' +

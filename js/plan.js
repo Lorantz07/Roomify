@@ -7,6 +7,7 @@
   'use strict';
 
   var NS = (window.Roomify = window.Roomify || {});
+  var clipCounter = 0;
 
   function escapeXml(value) {
     return String(value)
@@ -112,6 +113,44 @@
     return parts.join('');
   }
 
+  function objectMarkup(project, x, y, scale, roomWidth, roomHeight) {
+    var objects = project && Array.isArray(project.objects) ? project.objects : [];
+    if (!objects.length) return '';
+
+    clipCounter += 1;
+    var clipId = 'roomify-plan-clip-' + clipCounter;
+    var parts = [];
+
+    parts.push(
+      '<defs><clipPath id="' + clipId + '"><rect x="' + x + '" y="' + y +
+      '" width="' + roomWidth + '" height="' + roomHeight + '"/></clipPath></defs>'
+    );
+    parts.push('<g clip-path="url(#' + clipId + ')">');
+
+    objects.forEach(function (object) {
+      if (!object || typeof object !== 'object') return;
+
+      var item = NS.furniture ? NS.furniture.getItem(object.catalogId) : null;
+      var width = number(object.widthCm, item ? item.widthCm : 60);
+      var depth = number(object.depthCm, item ? item.depthCm : 60);
+      var rotation = number(object.rotation, 0);
+      var fill = typeof object.color === 'string' ? object.color : (item ? item.color : '#d5d1c7');
+      var shapeItem = item || { shape: 'rect', widthCm: width, depthCm: depth, color: fill };
+      var markup = NS.furniture
+        ? NS.furniture.renderTopView(shapeItem, width, depth, fill)
+        : '<rect width="' + width + '" height="' + depth + '" fill="' + escapeXml(fill) + '"/>';
+
+      parts.push(
+        '<g transform="translate(' + (x + number(object.x, 0) * scale) + ' ' +
+        (y + number(object.y, 0) * scale) + ') scale(' + scale + ') rotate(' +
+        rotation + ' ' + (width / 2) + ' ' + (depth / 2) + ')">' + markup + '</g>'
+      );
+    });
+
+    parts.push('</g>');
+    return parts.join('');
+  }
+
   /**
    * Render a project's room as an inline SVG.
    * @param {object} project
@@ -183,6 +222,8 @@
       grainY += grainGap;
     }
 
+    parts.push(objectMarkup(project, x, y, scale, roomWidth, roomHeight));
+
     parts.push(
       '<rect x="' + x + '" y="' + y + '" width="' + roomWidth + '" height="' + roomHeight +
       '" fill="none" stroke="#3a3d39" stroke-width="' + wall + '"/>'
@@ -214,7 +255,7 @@
       parts.push('<g>' + hintMarkup(project && project.type, x, y, roomWidth, roomHeight) + '</g>');
     }
 
-    if (detail) {
+    if (detail && !(Array.isArray(project.objects) && project.objects.length)) {
       var centerX = x + roomWidth / 2;
       var centerY = y + roomHeight / 2;
       parts.push(

@@ -3,12 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Room preview — Roomify</title>
-  <meta name="description" content="A measured Phase 1 room preview in Roomify. Your saved footprint, dimensions and finishes, ready for the next phase of the studio.">
+  <title>Room editor — Roomify</title>
+  <meta name="description" content="Furnish your measured Roomify plan. Place, move, rotate and resize real furniture, then keep every change saved in this browser.">
   <meta name="theme-color" content="#F5F1E8">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    // Preload fonts over HTTP only: file:// pages cannot fetch font files
+    // across origins, and CSS @font-face falls back gracefully there.
+    if (location.protocol !== 'file:') {
+      ['assets/fonts/dm-serif-display-latin.woff2', 'assets/fonts/dm-sans-latin.woff2'].forEach(function (href) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'font';
+        link.type = 'font/woff2';
+        link.crossOrigin = 'anonymous';
+        link.href = href;
+        document.head.appendChild(link);
+      });
+    }
+  </script>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -38,12 +51,12 @@
       </div>
 
       <div class="header__actions">
-        <span class="save-state" data-save-state>
+        <span class="save-state" data-save-state aria-live="polite">
           <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <circle cx="9" cy="9" r="7.25" stroke="currentColor" stroke-width="1.1"/>
             <path d="m5.8 9 2.1 2.1 4.3-4.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Saved locally
+          <span data-save-text>Saved locally</span>
         </span>
         <a class="btn btn--sm btn--ghost btn--back" href="dashboard.html">
           <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M8 4 3 9l5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -55,82 +68,224 @@
 
   <main id="main">
     <div data-editor-content hidden>
-      <section class="editor" aria-labelledby="room-title">
-        <div class="editor__layout">
-          <div class="editor-stage">
-            <div class="editor-stage__bar">
-              <span class="editor-stage__title">
-                Room plan
-                <span class="phase-badge">Phase 1 · Preview</span>
-              </span>
-              <span class="editor-stage__scale">Measured · fit to view</span>
+      <section class="editor" aria-label="Room editor">
+        <div class="editor-app">
+          <div class="editor-toolbar">
+            <div class="editor-toolbar__group">
+              <button class="tool-btn tool-btn--catalog" type="button" data-catalog-toggle aria-expanded="false" aria-controls="catalog-panel">
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <rect x="2.4" y="2.4" width="5.4" height="5.4" stroke="currentColor" stroke-width="1.15"/>
+                  <rect x="10.2" y="2.4" width="5.4" height="5.4" stroke="currentColor" stroke-width="1.15"/>
+                  <rect x="2.4" y="10.2" width="5.4" height="5.4" stroke="currentColor" stroke-width="1.15"/>
+                  <rect x="10.2" y="10.2" width="5.4" height="5.4" stroke="currentColor" stroke-width="1.15"/>
+                </svg>
+                Furniture
+              </button>
+              <button class="tool-btn" type="button" data-room-settings>
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M2.5 5h13M2.5 9h13M2.5 13h13" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/>
+                  <circle cx="6.4" cy="5" r="1.5" fill="#FBF8F1" stroke="currentColor" stroke-width="1.15"/>
+                  <circle cx="11.8" cy="9" r="1.5" fill="#FBF8F1" stroke="currentColor" stroke-width="1.15"/>
+                  <circle cx="7.4" cy="13" r="1.5" fill="#FBF8F1" stroke="currentColor" stroke-width="1.15"/>
+                </svg>
+                Room
+              </button>
+              <span class="toolbar-divider" aria-hidden="true"></span>
+              <button class="tool-btn tool-btn--icon" type="button" data-undo aria-label="Undo" title="Undo (Ctrl+Z)" disabled>
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M6.5 4.5 3 8l3.5 3.5M3 8h7.2a4.3 4.3 0 0 1 0 8.6H8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="tool-btn tool-btn--icon" type="button" data-redo aria-label="Redo" title="Redo (Ctrl+Shift+Z)" disabled>
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11.5 4.5 15 8l-3.5 3.5M15 8H7.8a4.3 4.3 0 0 0 0 8.6H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
 
-            <div class="editor-canvas">
-              <div class="editor-plan" data-plan></div>
-              <span class="editor-canvas__state">Read-only preview</span>
+            <div class="editor-toolbar__group editor-toolbar__group--right">
+              <span class="editor-save-inline" data-save-inline>Saved</span>
+              <button class="tool-btn tool-btn--toggle is-active" type="button" data-snap aria-pressed="true" title="Snap to a 5 cm grid and to walls">
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M3 3h12v12H3zM3 7.5h12M3 12h12M7.5 3v12M12 3v12" stroke="currentColor" stroke-width="1" opacity="0.85"/>
+                </svg>
+                Snap 5 cm
+              </button>
+              <div class="zoom-control" role="group" aria-label="Zoom">
+                <button type="button" data-zoom-out aria-label="Zoom out">−</button>
+                <button class="zoom-control__label" type="button" data-zoom-fit title="Fit the room to the view">100%</button>
+                <button type="button" data-zoom-in aria-label="Zoom in">+</button>
+              </div>
             </div>
-
-            <p class="editor-stage__foot">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1"/>
-                <path d="M8 7.2v4M8 4.9v.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-              </svg>
-              This plan is generated from the room you saved. Furniture placement, drag-and-drop and editing arrive in Phase 2.
-            </p>
           </div>
 
-          <aside class="editor-panel">
-            <p class="editor-panel__kicker">Room file</p>
-            <h1 id="room-title" data-project-name>Room</h1>
-            <p class="editor-panel__type">
-              <span data-project-type>Room</span>
-              <span aria-hidden="true">·</span>
-              <span data-project-floor>Oak floor</span>
-            </p>
+          <div class="editor-workspace">
+            <aside class="catalog-panel" id="catalog-panel" data-catalog-panel aria-label="Furniture catalogue">
+              <div class="panel-head">
+                <div>
+                  <p class="panel-kicker">Catalogue</p>
+                  <h2>Furniture</h2>
+                </div>
+                <button class="panel-close" type="button" data-catalog-close aria-label="Close furniture catalogue">
+                  <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m4 4 10 10M14 4 4 14" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>
+                </button>
+              </div>
 
-            <dl class="detail-list">
-              <div>
-                <dt>Footprint</dt>
-                <dd data-dimensions>400 × 500 cm</dd>
-              </div>
-              <div>
-                <dt>Area</dt>
-                <dd data-area>20 m²</dd>
-              </div>
-              <div>
-                <dt>Floor finish</dt>
-                <dd data-floor-detail>Oak</dd>
-              </div>
-              <div>
-                <dt>Created</dt>
-                <dd data-created>—</dd>
-              </div>
-              <div>
-                <dt>Last saved</dt>
-                <dd data-updated>—</dd>
-              </div>
-            </dl>
-
-            <div class="phase-note">
-              <p class="phase-note__title">
-                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <rect x="2.6" y="2.6" width="10.8" height="10.8" stroke="currentColor" stroke-width="1"/>
-                  <path d="M5.2 8.2 7 10l3.9-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+              <div class="catalog-search">
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="4.9" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="m11.6 11.6 3.2 3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
                 </svg>
-                The canvas is next.
-              </p>
-              <p>Phase 1 gives every room a real, measured footprint. Furniture, colour and drag-and-drop editing will be built in Phase 2 — this page is a preview of the plan.</p>
+                <input type="search" data-catalog-search placeholder="Search furniture" aria-label="Search furniture" autocomplete="off">
+              </div>
+
+              <div class="catalog-filters" data-catalog-filters role="group" aria-label="Furniture categories"></div>
+              <div class="catalog-list" data-catalog-list></div>
+              <p class="catalog-empty" data-catalog-empty hidden>No pieces match that search. Try another word or category.</p>
+              <p class="catalog-foot">Every piece uses a real-world size in centimeters. Select one to add it to the centre of your room.</p>
+            </aside>
+
+            <div class="stage">
+              <div class="stage__bar">
+                <div class="stage__title">
+                  <span class="stage__name" data-stage-name>Room</span>
+                  <span class="stage__badge" data-stage-dims>400 × 500 cm</span>
+                </div>
+                <span class="stage__hint">Drag to move · Alt disables snap</span>
+              </div>
+
+              <div class="board-wrap" data-board-wrap>
+                <svg class="board" data-board tabindex="0" role="application" aria-label="Room canvas. Use arrow keys to nudge the selected piece."></svg>
+
+                <div class="board-empty" data-board-empty>
+                  <p class="board-empty__title">An empty floor.</p>
+                  <p>Choose a piece from the catalogue to begin furnishing this room.</p>
+                </div>
+              </div>
+
+              <div class="stage__foot">
+                <p>Scroll to zoom · Drag the floor to pan</p>
+                <p data-selection-summary aria-live="polite">Nothing selected</p>
+              </div>
             </div>
 
-            <div class="editor-panel__actions">
-              <a class="btn" href="dashboard.html?new=1">
-                Start another room
-                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <a class="btn btn--ghost" href="dashboard.html">Back to studio</a>
-            </div>
-          </aside>
+            <aside class="props-panel" aria-label="Room and furniture properties">
+              <div data-room-props>
+                <div class="panel-head">
+                  <div>
+                    <p class="panel-kicker">Room</p>
+                    <h2 data-props-room-name>Room</h2>
+                  </div>
+                </div>
+                <p class="props-sub" data-props-room-type>Room</p>
+
+                <dl class="detail-list">
+                  <div>
+                    <dt>Footprint</dt>
+                    <dd data-props-dims>400 × 500 cm</dd>
+                  </div>
+                  <div>
+                    <dt>Area</dt>
+                    <dd data-props-area>20 m²</dd>
+                  </div>
+                  <div>
+                    <dt>Floor</dt>
+                    <dd data-props-floor>Oak</dd>
+                  </div>
+                  <div>
+                    <dt>Furniture</dt>
+                    <dd data-props-pieces>0 pieces</dd>
+                  </div>
+                  <div>
+                    <dt>Updated</dt>
+                    <dd data-props-updated>—</dd>
+                  </div>
+                </dl>
+
+                <button class="btn btn--sm btn--block props-room-btn" type="button" data-room-settings>Edit room</button>
+                <p class="panel-hint">Select a piece on the plan to change its position, size, rotation and colour.</p>
+              </div>
+
+              <div data-object-props hidden>
+                <div class="panel-head">
+                  <div>
+                    <p class="panel-kicker">Selected piece</p>
+                    <h2 data-object-name>Furniture</h2>
+                  </div>
+                </div>
+
+                <div class="props-thumb" data-object-thumb aria-hidden="true"></div>
+
+                <div class="field-group">
+                  <fieldset class="field field--fieldset">
+                    <legend class="field__label">Position</legend>
+                    <div class="field-row">
+                      <div class="field">
+                        <label class="field__label" for="object-x">X</label>
+                        <div class="field__unit">
+                          <input class="field__input" id="object-x" type="number" inputmode="numeric" min="0" step="1" data-object-x>
+                          <span aria-hidden="true">cm</span>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="object-y">Y</label>
+                        <div class="field__unit">
+                          <input class="field__input" id="object-y" type="number" inputmode="numeric" min="0" step="1" data-object-y>
+                          <span aria-hidden="true">cm</span>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="field field--fieldset">
+                    <legend class="field__label">Size</legend>
+                    <div class="field-row">
+                      <div class="field">
+                        <label class="field__label" for="object-width">Width</label>
+                        <div class="field__unit">
+                          <input class="field__input" id="object-width" type="number" inputmode="numeric" min="20" max="600" step="1" data-object-width>
+                          <span aria-hidden="true">cm</span>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="object-depth">Depth</label>
+                        <div class="field__unit">
+                          <input class="field__input" id="object-depth" type="number" inputmode="numeric" min="20" max="600" step="1" data-object-depth>
+                          <span aria-hidden="true">cm</span>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="field">
+                    <label class="field__label" for="object-rotation">Rotation</label>
+                    <div class="rotation-row">
+                      <button class="rotate-btn" type="button" data-rotate="-15" aria-label="Rotate 15 degrees anticlockwise">−15°</button>
+                      <div class="field__unit">
+                        <input class="field__input" id="object-rotation" type="number" inputmode="numeric" min="0" max="359" step="1" data-object-rotation>
+                        <span aria-hidden="true">°</span>
+                      </div>
+                      <button class="rotate-btn" type="button" data-rotate="15" aria-label="Rotate 15 degrees clockwise">+15°</button>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <span class="field__label">Colour</span>
+                    <div class="color-row" data-color-row></div>
+                  </div>
+                </div>
+
+                <div class="props-actions">
+                  <button class="btn btn--sm btn--ghost" type="button" data-duplicate>
+                    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="6.2" y="6.2" width="8.6" height="8.6" stroke="currentColor" stroke-width="1.2"/><path d="M11.8 3.2H3.2v8.6" stroke="currentColor" stroke-width="1.2"/></svg>
+                    Duplicate
+                  </button>
+                  <button class="btn btn--sm btn--danger" type="button" data-delete-object>
+                    <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 5h11M7 5V3.4h4V5M5.2 5l.7 9.4h6.2l.7-9.4" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Delete
+                  </button>
+                </div>
+
+                <p class="panel-hint">Drag the round handle above a selected piece to rotate it. Hold Alt while moving to ignore snapping.</p>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
     </div>
@@ -147,7 +302,7 @@
           </svg>
           <p class="eyebrow eyebrow--plain">Room not found</p>
           <h1 id="missing-title">This room isn't here.</h1>
-          <p data-missing-message>Open a saved room from your studio to see its measured plan.</p>
+          <p data-missing-message>Open a saved room from your studio to edit its plan.</p>
           <div class="editor-missing__actions">
             <a class="btn" href="dashboard.html">
               Back to your studio
@@ -162,15 +317,82 @@
 
   <footer class="slim-footer">
     <div class="container slim-footer__inner">
-      <p>Phase 1 · measured room preview</p>
+      <p>Room editor · every change stays in this browser.</p>
       <p>© <span data-year>2026</span> Roomify · <a href="index.html">Back to home</a></p>
     </div>
   </footer>
 
+  <div class="catalog-backdrop" data-catalog-backdrop hidden></div>
+
+  <dialog class="dialog" id="room-settings-dialog" aria-labelledby="room-settings-title">
+    <button class="dialog__close" type="button" aria-label="Close dialog" data-dialog-close>
+      <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m3 3 12 12M15 3 3 15" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>
+    </button>
+    <div class="dialog__head">
+      <p class="dialog__kicker">Room settings</p>
+      <h2 class="dialog__title" id="room-settings-title">Reshape the room.</h2>
+      <p class="dialog__intro">Change the name, true footprint or floor finish. Furniture is kept inside the new dimensions.</p>
+    </div>
+
+    <form data-room-form novalidate>
+      <div class="dialog__body">
+        <div class="field-group">
+          <div class="field">
+            <label class="field__label" for="room-name">
+              <span>Room name</span>
+              <span class="field__hint">Optional</span>
+            </label>
+            <input class="field__input" id="room-name" name="name" type="text" maxlength="80" placeholder="e.g. Reading room" autocomplete="off" data-room-name-input>
+          </div>
+
+          <fieldset class="field field--fieldset">
+            <legend class="field__label">
+              <span>Footprint</span>
+              <span class="field__hint">150–1500 cm</span>
+            </legend>
+            <div class="field-row">
+              <div class="field">
+                <label class="field__label" for="room-width">Width</label>
+                <div class="field__unit">
+                  <input class="field__input" id="room-width" name="width" type="number" inputmode="numeric" min="150" max="1500" step="1" required data-room-width>
+                  <span aria-hidden="true">cm</span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="room-height">Depth</label>
+                <div class="field__unit">
+                  <input class="field__input" id="room-height" name="height" type="number" inputmode="numeric" min="150" max="1500" step="1" required data-room-height>
+                  <span aria-hidden="true">cm</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="field field--fieldset">
+            <legend class="field__label">Floor finish</legend>
+            <div class="swatch-group" data-room-floor-group></div>
+          </fieldset>
+        </div>
+
+        <p class="field__error" role="alert" data-room-error hidden></p>
+        <p class="form-note">Shrinking a room moves furniture inward. Pieces larger than the new room are reduced to fit.</p>
+      </div>
+
+      <div class="dialog__foot">
+        <span class="dialog__foot-note">Saved in this browser.</span>
+        <button class="btn btn--sm btn--ghost" type="button" data-dialog-close>Cancel</button>
+        <button class="btn btn--sm" type="submit">
+          Save changes
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </form>
+  </dialog>
+
   <script src="js/catalog.js" defer></script>
   <script src="js/ui.js" defer></script>
   <script src="js/storage.js" defer></script>
-  <script src="js/plan.js" defer></script>
+  <script src="js/furniture.js" defer></script>
   <script src="js/nav.js" defer></script>
   <script src="js/editor.js" defer></script>
 </body>
